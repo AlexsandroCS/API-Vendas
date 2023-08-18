@@ -1,6 +1,8 @@
 package io.github.AlexsandroCS.Vendas.domain.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -19,8 +21,10 @@ public class Produto {
     private Integer id;
 
     @Column(name = "descricao", length = 100)
+    @NotEmpty(message = "{campo.descricao.obrigatorio}")
     private String descricao;
 
     @Column(name = "preco")
+    @NotNull(message = "{campo.preco.obrigatorio}")
     private BigDecimal preco;
 }

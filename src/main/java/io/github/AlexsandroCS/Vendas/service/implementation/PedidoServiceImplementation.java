@@ -1,4 +1,4 @@
-package io.github.AlexsandroCS.Vendas.domain.service.implementation;
+package io.github.AlexsandroCS.Vendas.service.implementation;
 
 import io.github.AlexsandroCS.Vendas.REST.DTO.ItemPedidoDTO;
 import io.github.AlexsandroCS.Vendas.REST.DTO.PedidoDTO;
@@ -11,7 +11,7 @@ import io.github.AlexsandroCS.Vendas.domain.repository.Clientes;
 import io.github.AlexsandroCS.Vendas.domain.repository.ItemPedidos;
 import io.github.AlexsandroCS.Vendas.domain.repository.Pedidos;
 import io.github.AlexsandroCS.Vendas.domain.repository.Produtos;
-import io.github.AlexsandroCS.Vendas.domain.service.PedidoService;
+import io.github.AlexsandroCS.Vendas.service.PedidoService;
 import io.github.AlexsandroCS.Vendas.exception.ExceptionError;
 import io.github.AlexsandroCS.Vendas.exception.PedidoException;
 import lombok.RequiredArgsConstructor;

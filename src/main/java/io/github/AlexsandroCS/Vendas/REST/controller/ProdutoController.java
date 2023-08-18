@@ -2,6 +2,7 @@ package io.github.AlexsandroCS.Vendas.REST.controller;
 
 import io.github.AlexsandroCS.Vendas.domain.entity.Produto;
 import io.github.AlexsandroCS.Vendas.domain.repository.Produtos;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ public class ProdutoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Produto salvarProduto(@RequestBody Produto novoProduto){
+    public Produto salvarProduto(@RequestBody @Valid Produto novoProduto){
         return produtos.save(novoProduto);
     }
 
@@ -42,7 +43,7 @@ public class ProdutoController {
 
     @PutMapping(value = "{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void modificaProduto(@PathVariable(value = "id") Integer idProduto, @RequestBody Produto produto){
+    public void modificaProduto(@PathVariable(value = "id") Integer idProduto, @RequestBody @Valid Produto produto){
         produtos.findById(idProduto).map(p -> {
             produto.setId(p.getId());
             produtos.save(produto);

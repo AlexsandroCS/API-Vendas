@@ -13,4 +13,8 @@ public class APIErrors {
     public APIErrors(String mensagemErro) {
         this.errors = Arrays.asList(mensagemErro);
     }
+
+    public APIErrors(List<String> errors) {
+        this.errors = errors;
+    }
 }

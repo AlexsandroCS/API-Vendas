@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 public class InformacoesPedidoDTO {
     private Integer codigo;
-    private Integer cpf;
+    private String cpf;
     private String nomeCliente;
     private BigDecimal total;
     private String dataPedido;

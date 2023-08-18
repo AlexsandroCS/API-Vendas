@@ -7,7 +7,8 @@ import io.github.AlexsandroCS.Vendas.REST.DTO.PedidoDTO;
 import io.github.AlexsandroCS.Vendas.domain.ENUM.StatusPedido;
 import io.github.AlexsandroCS.Vendas.domain.entity.ItemPedido;
 import io.github.AlexsandroCS.Vendas.domain.entity.Pedido;
-import io.github.AlexsandroCS.Vendas.domain.service.PedidoService;
+import io.github.AlexsandroCS.Vendas.service.PedidoService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +31,7 @@ public class PedidoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Integer save(@RequestBody PedidoDTO pedidoDTO) {
+    public Integer save(@RequestBody @Valid PedidoDTO pedidoDTO) {
         Pedido pedido = service.salvar(pedidoDTO);
         return pedido.getId();
     }

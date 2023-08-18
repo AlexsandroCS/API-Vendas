@@ -1,5 +1,7 @@
 package io.github.AlexsandroCS.Vendas.REST.DTO;
 
+import io.github.AlexsandroCS.Vendas.validation.NotEmptyList;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,9 +13,14 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 
-public class PedidoDTO {
+    public class PedidoDTO {
 
-    private Integer cliente;
-    private BigDecimal total;
-    private List<ItemPedidoDTO> itens;
-}
+        @NotNull(message = "{campo.codigo-cliente.obrigatorio}")
+        private Integer cliente;
+
+        @NotNull(message = "{campo.total-pedido.obrigatorio}")
+        private BigDecimal total;
+
+        @NotEmptyList(message = "{campo.itens-pedido.obrigatorio}")
+        private List<ItemPedidoDTO> itens;
+    }

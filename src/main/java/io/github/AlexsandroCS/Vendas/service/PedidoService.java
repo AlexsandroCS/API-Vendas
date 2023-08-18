@@ -1,4 +1,4 @@
-package io.github.AlexsandroCS.Vendas.domain.service;
+package io.github.AlexsandroCS.Vendas.service;
 
 import io.github.AlexsandroCS.Vendas.REST.DTO.PedidoDTO;
 import io.github.AlexsandroCS.Vendas.domain.ENUM.StatusPedido;
