@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.br.CPF;
 
 import java.util.List;
@@ -24,7 +25,8 @@ public class Cliente {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native",strategy = "native")
     @Column(name = "id")
     private Integer id;
 

@@ -2,38 +2,52 @@ package io.github.AlexsandroCS.Vendas.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration{
+public class SecurityConfiguration {
 
-    public PasswordEncoder passwordEncoder(){
-//        PasswordEncoder passwordEncoder = new PasswordEncoder() {
-//            @Override
-//            public String encode(CharSequence rawPassword) { // Criptografia da senha do usuário.
-//                return rawPassword + "321";
-//            }
-//
-//            @Override
-//            public boolean matches(CharSequence rawPassword, String encodedPassword) { // Recebe Senha do usuário e a Senha do usuário criptografada, podendo fazer uma verificação nas senhas.
-//                return (rawPassword + "321").equals(encodedPassword);
-//            }
-//        }
-        return new BCryptPasswordEncoder(); // Ao passar a senha, gera uma senha com Hash.
+    // Corrente de filtros de segurança que será aplicado na requisição para fazer a segurança da aplicação.
+    // Fazer validações para liberar a requisição do usuário.
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        return httpSecurity
+                .csrf(csrf -> csrf.disable())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                // Requisições HTTP que serão autenticadas.
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(HttpMethod.POST, "/api/login","/api/registro").permitAll()
+
+                        .requestMatchers(HttpMethod.POST,"/api/clientes","/api/pedidos","/api/produtos")
+                        .hasRole("ADMIN_ROLE") // Para fazer um POST nas URL's acima, precisa ser um ADMIN.
+
+                        .requestMatchers(HttpMethod.GET, "/api/clientes","/api/pedidos")
+                        .hasRole("ADMIN_ROLE") // Para fazer um GET nas URL's acima, precisa ser um ADMIN.
+
+                        .requestMatchers(HttpMethod.DELETE, "/api/clientes","/api/pedidos","/api/produtos")
+                        .hasRole("ADMIN_ROLE") // Para fazer um DELETE nas URL's acima, precisa ser um ADMIN.
+
+                        .anyRequest().authenticated()
+                )
+                .build();
     }
 
     @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-        UserDetails user = User.builder().username("root").password(passwordEncoder.encode("123")).roles("USER").build();
-        return new InMemoryUserDetailsManager(user);
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 }

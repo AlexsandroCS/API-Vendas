@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,7 +15,8 @@ import lombok.NoArgsConstructor;
 public class ItemPedido {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native",strategy = "native")
     @Column(name = "id")
     private Integer id;
 

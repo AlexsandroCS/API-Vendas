@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -19,7 +20,8 @@ import java.util.List;
 public class Pedido {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native",strategy = "native")
     @Column(name = "id")
     private Integer id;
 

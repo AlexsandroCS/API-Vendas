@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.math.BigDecimal;
 
@@ -16,7 +17,8 @@ import java.math.BigDecimal;
 public class Produto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native",strategy = "native")
     @Column(name = "id")
     private Integer id;
 
@@ -24,7 +26,7 @@ public class Produto {
     @NotEmpty(message = "{campo.descricao.obrigatorio}")
     private String descricao;
 
-    @Column(name = "preco")
+    @Column(name = "preco_unitario")
     @NotNull(message = "{campo.preco.obrigatorio}")
     private BigDecimal preco;
 }
