@@ -18,7 +18,10 @@
   <li>Maven</li>
   <li>Spring Boot</li>
   <li>Spring Data JPA</li>
+  <li>Spring Security</li>
+  <li>JSON Web Token</li>
   <li>Database H2</li>
+  <li>Database MySQL</li>
   <li>DTO - Data Transfer Object</li>
   <li>Postman for JSON tests</li>
 </ul>
