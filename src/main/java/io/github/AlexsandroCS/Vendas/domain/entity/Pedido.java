@@ -35,7 +35,7 @@ public class Pedido {
     @Column(name = "total", precision = 20, scale = 2)
     private BigDecimal total;
 
-    @Enumerated(EnumType.STRING) //
+    @Enumerated(EnumType.STRING)
     @Column(name = "status_pedido")
     private StatusPedido status;
 

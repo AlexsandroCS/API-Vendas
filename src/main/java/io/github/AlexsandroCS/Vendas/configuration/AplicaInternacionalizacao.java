@@ -1,6 +1,5 @@
 package io.github.AlexsandroCS.Vendas.configuration;
 
-import org.springframework.cglib.core.Local;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +9,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import java.util.Locale;
 
 @Configuration
-public class aplicaInternacionalizacao {
+public class AplicaInternacionalizacao {
 
     @Bean
     public MessageSource messageSource(){
